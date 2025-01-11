@@ -1,0 +1,84 @@
+﻿// The .op() mixin calls its @content callback iff the
+// specified logical operation evaluates to true.  The
+// input parameters (@first and @second) can either be
+// selectors to combine (typically :checked selectors)
+// or detached rulesets containing further .op() calls
+// to chain.
+// To pass a .op() call, use the following syntax:
+// { .c(@c) { .op(@c, blah, xor, blah); } }
+// We need this complexity to pass @invertCombinator &
+// @content from the outer call; see 
+// https://github.com/less/less.js/issues/2558
+
+// This overload is called by the outermost operation,
+// as opposed to operations passed as detached ruleset 
+// parameters.  It calls the actual overloads with the
+// default @invertCombinator and the explicitly-passed
+// @content parameter
+.op(@first, @operation, @second, @content) when (@operation = and), (@operation = xor), (@operation = or)  {
+	.op(normal @content, @first, @operation, @second);   // Pass @content via scope
+}
+
+.op(@c, @first, @operation, @second) when (length(@c) > 1) {
+	.op(@first, @operation, @second, extract(@c, 1), extract(@c, 2));
+}
+
+@tilde: ~'~ ';
+// These overloads are called in detached rulesets when chaining
+.op(@first, xor, @second, normal, @content) {
+	.callSelector(@first, invert, { @{tilde} {
+		.callSelector(@second, normal, @content);
+	}});
+	.callSelector(@first, normal, { @{tilde} {
+		.callSelector(@second, invert, @content);
+	}});
+}
+.op(@first, xor, @second, invert, @content) {
+	.callSelector(@first, invert, { @{tilde} {
+		.callSelector(@second, invert, @content);
+	}});
+	.callSelector(@first, normal, { @{tilde} {
+		.callSelector(@second, normal, @content);
+	}});
+}
+
+.op(@first, or, @second, normal, @content) {
+	.callSelector(@first, normal, @content);
+	.callSelector(@second, normal, @content);
+}
+.op(@first, or, @second, invert, @content) {
+	.callSelector(@first, invert, { @{tilde} {
+		.callSelector(@second, invert, @content);
+	}});
+}
+
+.op(@first, and, @second, normal, @content) {
+	.callSelector(@first, normal, { @{tilde} {
+		.callSelector(@second, normal, @content);
+	}});
+}
+.op(@first, and, @second, invert, @content) {
+	.callSelector(@first, invert, @content);
+	.callSelector(@second, invert, @content);
+}
+
+// Llama a un selector (como una cadena o un conjunto de reglas anidadas),
+// pasando un contexto para la inversión y el contenido de destino.
+// Esto solo se debe usar para el encadenamiento .op().
+// Los parámetros @mode, @content deben ser una única
+.callSelector(@selector, @mode, @content) when (isKeyword(@selector)) {
+	.callSelector(%(~'#%s', @selector), @mode, @content);
+}
+.callSelector(@selector, @mode, @content) when (isString(@selector)) {
+	&@{selector}:checked		when(@mode = normal) { @content(); }
+	&@{selector}:not(:checked)	when(@mode = invert) { @content(); }
+}
+.callSelector(@selector, @mode, @content) when (default()) {  // isruleset(@selector) no funciona ?
+	@selector();
+	.c(@mode @content);
+}
+
+// Amplíe el paquete de parámetros @c para llamadas directas.
+.callSelector(@selector, @c) {
+	.callSelector(@selector, extract(@c, 1), extract(@c, 2));
+}

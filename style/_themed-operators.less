@@ -1,0 +1,85 @@
+﻿@import "_operators";
+
+// Estos mixins llaman a .op() y pasan un selector de resultados
+// que colorea la puerta con el ID dado, así como
+// los siguientes conectores y resultados. También
+// colorearán los resultados de los selectores encadenados intermedios
+// (también debes pasar un ID de resultado al encadenar).
+// Si se usa la misma operación más de una vez, pasa
+// none como resultado de la segunda para evitar un
+// conjunto de selectores adicional.
+
+// Los mixins extienden los selectores ActiveGate para colorear
+// los resultados. Estos selectores deben incluirse (por
+// referencia) desde gate-theme.less para usar este archivo.
+
+// Esto se llama para la capa más externa.
+.coloredOp(@first, @operation, @second, @output, @result: hasResult) when (@operation = and), (@operation = xor), (@operation = or) {
+	@combinatedOutput: %(~'~ #%s', replace(@output, '^#', ''));
+	#private.callProbe(@first);
+	#private.callProbe(@second);
+	.op(@first, @operation, @second, {
+		@{combinatedOutput}:extend(.Connectors.Active all) { }
+		@{combinatedOutput}:extend(.ActiveGate.OR all) when (@operation = or) {}
+		@{combinatedOutput}:extend(.ActiveGate.AND all) when (@operation = and) {}
+		@{combinatedOutput}:extend(.ActiveGate.XOR all) when (@operation = xor) {}
+		@{combinatedOutput}:extend(.ActiveGate.Result all) when (@result = hasResult) { }
+	});
+}
+
+// Esto se llama para selectores encadenados.
+// La primera sobrecarga será invocada por
+// la capa externa para colorear esta parte
+// de la cadena. La segunda sobrecarga es
+// invocada por el encadenamiento normal y simplemente
+// pasa al .op() real. Yo
+// reutilizo el paso a través del parámetro @c para
+// eliminar la ambigüedad.
+.coloredOp(probe, @first, @operation, @second, @output) when not (@output = none) {
+	.coloredOp(@first, @operation, @second, @output, noResult);
+}
+.coloredOp(root, @first, @operation, @second, @output) {
+	.coloredOp(@first, @operation, @second, @output, hasResult);
+}
+.coloredOp(@mode, @first, @operation, @second, @output) when (length(@mode) > 1) {
+	.op(@mode, @first, @operation, @second);
+}
+
+#private {
+	.callProbe(@operand) when not (iskeyword(@operand)) and not (isstring(@operand)) {
+		@operand();
+		.c(probe);
+	}
+}
+
+// Crea un único sumador completo. Esta regla se puede encadenar como una entrada
+// como una simple llamada .op(), que produce el resultado. Cuando se llama en
+// el nivel raíz, pasa el literal `root` como @c.
+.fullAdder(@c, @prefix, @carryIn) {
+	@prefixFormat: %(~'#%s-%%s', @prefix);
+	.coloredOp(@c,
+		{ .c(@c) { .coloredOp(@c,
+			@carryIn,
+			and,
+			{ .c(@c) { .coloredOp(@c, %(@prefixFormat, a), xor, %(@prefixFormat, b), %(@prefixFormat, xor-gate-input)); } },
+			%(@prefixFormat, and-gate-sum)
+		); } },
+		or,
+		{ .c(@c) { .coloredOp(@c, %(@prefixFormat, a), and, %(@prefixFormat, b), %(@prefixFormat, and-gate-input)) } },
+		%(@prefixFormat, or-gate-carry-out)
+	);
+}
+
+// Colorea la salida de suma de un único sumador completo. Esto
+// no se llama cuando se encadena como operador, pero se llama cuando
+// se buscan operadores encadenados coloreados.
+.fullAdder(@mode, @prefix, @carryIn) when (@mode = root), (@mode = probe) {
+	@prefixFormat: %(~'#%s-%%s', @prefix);
+	.coloredOp(
+		// Al pasar un selector anidado como carryIn, no lo pruebe una segunda vez.
+		{ .c(@c) when not (@c = probe) { .callSelector(@carryIn, @c); } },
+		xor,
+		{ .c(@c) { .coloredOp(@c, %(@prefixFormat, a), xor, %(@prefixFormat, b), none); } },
+		%(@prefixFormat, xor-gate-carry)
+	);
+}

@@ -1,0 +1,136 @@
+﻿@import "_variables.less";
+
+// La cantidad de dígitos binarios en cada número de entrada.
+// Para cambiar el tamaño de entrada, simplemente ajuste esto y
+// agregue más elementos HTML para los nuevos dígitos de entrada.
+@digitCount: 5;
+
+@digitSize: 32px;
+
+.DecimalAdder {
+	position: relative;
+	overflow: hidden;
+	font-size: .7 * @digitSize;
+	width: (@digitCount + 1) * @digitSize;
+	height: @digitSize;
+	padding-top: 2 * @digitSize;
+
+	&:before {
+		content: '+';
+		padding-left: 4px;
+		line-height: @digitSize;
+		box-sizing: padding-box;
+		display: block;
+		position: absolute;
+		left: @digitSize / 2;
+		top: @digitSize + 0;
+		height: @digitSize;
+		width: (@digitCount + 1) * @digitSize;
+		border-bottom: solid 1px black;
+	}
+
+	&:after {
+		.CountTo(2 * (pow(2, @digitCount) - 1), '\00000a');
+		content: @resultEven;
+		display: block;
+		text-align: right;
+		white-space: pre;
+		padding-right: @digitSize / 4;
+		line-height: @digitSize;
+		margin-top: -2px * @digitCount;
+	}
+
+	input {
+		opacity: 0;
+		position: absolute;
+		top: -@digitSize;
+	}
+
+	label {
+		overflow: hidden;
+		display: block;
+		height: @digitSize;
+		width: @digitSize;
+		cursor: pointer;
+		text-align: center;
+		position: absolute;
+		background: white;
+		transition: border-color @duration @easing;
+		box-sizing: border-box;
+		border: 1px solid white;
+
+		&:after {
+			content: '0\00000a1';
+			white-space: pre;
+			line-height: @digitSize;
+			position: relative;
+			top: -1px; 
+			transition: top @duration @easing;
+		}
+	}
+
+	input:checked + div + label:after {
+		top: -@digitSize - 1px;
+	}
+
+	input:focus + div + label {
+		border-color: #FFC107;
+	}
+
+	label[for^="decimal-adder-a"] {
+		top: 0;
+	}
+
+	label[for^="decimal-adder-b"] {
+		top: @digitSize;
+	}
+
+	input + div {
+		// Estos divs obtienen márgenes negativos cuando los <input> están activados para compensar el resultado.
+		margin-top: 0;
+		height: 1px; 
+	}
+
+	.Digit(@digitCount - 1);
+}
+
+.Digit(@logarithm) {
+	// Establece la ubicación y el desplazamiento para cada par de dígitos de entrada
+	@value: pow(2, @logarithm);
+
+	#decimal-adder-a-@{logarithm}, #decimal-adder-b-@{logarithm} {
+		+ div {
+			transition: margin-top .1s * @value @easing;
+		}
+
+		&:checked + div {
+			margin-top: -@value * @digitSize;
+		}
+	}
+
+	label[for^="decimal-adder"][for$="-@{logarithm}"] {
+		right: @logarithm * @digitSize;
+	}
+}
+
+.Digit(@index) when (@index > 0) {
+	.Digit(@index - 1);
+}
+
+// Une los números desde 0 hasta @count.
+// Produce resultEven o resultOdd,
+// porque las variables LESS no se pueden asignar
+// de forma recursiva.
+.CountTo(0, @separator) {
+	@resultEven: '0';
+}
+
+.CountTo(@count, @separator) when (@count > 0) and (mod(@count, 2) = 0) {
+	.CountTo(@count - 1, @separator);
+	@resultEven: %('%s%s%d', @resultOdd, @separator, @count);
+}
+
+.CountTo(@count, @separator) when (mod(@count, 2) = 1) {
+	.CountTo(@count - 1, @separator);
+	@resultOdd: %('%s%s%d', @resultEven, @separator, @count);
+}

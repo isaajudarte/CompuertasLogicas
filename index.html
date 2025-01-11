@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Compuertas Logicas</title>
+	<meta name="viewport" content="width=device-width" />
+	<link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic" rel="stylesheet" type="text/css" />
+	<link href="styles/layout.css" rel="stylesheet" />
+	<link href="styles/gate-theme.css" rel="stylesheet" />
+	<link href="styles/basic-gates.css" rel="stylesheet" />
+	<link href="styles/chained-adder.css" rel="stylesheet" />
+	<link href="styles/decimal-adder.css" rel="stylesheet" />
+
+	<meta name="theme-color" content="#3F51B5">
+	<meta name="msapplication-TileColor" content="#3F51B5">
+	<link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/icons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/icons/favicon-194x194.png" sizes="194x194">
+	<link rel="icon" type="image/png" href="/icons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/icons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/icons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/icons/manifest.json">
+	<meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
+
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-3656687-6', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+<body>
+	<nav>
+		<a href="#gates" id="gates" tabindex="1">Sección 1</a>
+		<section>
+			<div class="ShrinkWrap">
+				<ul class="CanvasList">
+					<li>
+						<h2>And</h2>
+						<div class="Canvas" style="width: 9rem; height: 17rem;">
+							<input type="checkbox" id="simple-and-a" style="top: 0; left: 0;" />
+							<label for="simple-and-a" style="top: 0; left: 0;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3rem; left: 1.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Left Up" style="top: 5rem; left: 1.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Left" style="top: 5rem; left: 3.5rem; height: 2rem;"></div>
+							</div>
+
+							<input type="checkbox" id="simple-and-b" style="top: 0; left: 6rem;" />
+							<label for="simple-and-b" style="top: 0; left: 6rem;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3rem; left: 7.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Right Up" style="top: 5rem; left: 5.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Right" style="top: 5rem; left: 5.5rem; height: 2rem;"></div>
+							</div>
+
+							<div id="simple-and-gate" class="Gate AND" style="left: 2.5rem; top: 7rem;">
+								<span></span>
+								<span></span>
+								<div></div>
+							</div>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 12rem; left: 4.5rem; height: 2rem;"></div>
+								<div class="Result" style="left: 3rem; top: 14rem;"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h2>Or</h2>
+						<div class="Canvas" style="width: 9rem; height: 17rem;">
+							<input type="checkbox" id="simple-or-a" style="top: 0.5rem; left: 0;" />
+							<label for="simple-or-a" style="top: 0.5rem; left: 0;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3.5rem; left: 1.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Left Up" style="top: 5.5rem; left: 1.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Left" style="top: 5.5rem; left: 3.5rem; height: 2rem;"></div>
+								<div class="Connector Vertical Convex Left" style="top: 7.5rem; left: 3.5rem;"></div>
+							</div>
+
+							<input type="checkbox" id="simple-or-b" style="top: 0.5rem; left: 6rem;" />
+							<label for="simple-or-b" style="top: 0.5rem; left: 6rem;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3.5rem; left: 7.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Right Up" style="top: 5.5rem; left: 5.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Right" style="top: 5.5rem; left: 5.5rem; height: 2rem;"></div>
+								<div class="Connector Vertical Convex Right" style="top: 7.5rem; left: 5.5rem;"></div>
+							</div>
+
+							<div id="simple-or-gate" class="Gate OR" style="left: 2.5rem; top: 7.5rem;">
+								<span></span>
+								<span></span>
+								<div></div>
+							</div>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 11.5rem; left: 4.5rem; height: 2rem;"></div>
+								<div class="Result" style="left: 3rem; top: 13.5rem;"></div>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h2>XOR</h2>
+						<div class="Canvas" style="width: 9rem; height: 17rem;">
+							<input type="checkbox" id="simple-xor-a" style="top: 0; left: 0;" />
+							<label for="simple-xor-a" style="top: 0; left: 0;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3rem; left: 1.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Left Up" style="top: 5rem; left: 1.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Left" style="top: 5rem; left: 3.5rem; height: 2rem;"></div>
+								<div class="Connector Vertical Convex Left" style="top: 7rem; left: 3.5rem;"></div>
+							</div>
+
+							<input type="checkbox" id="simple-xor-b" style="top: 0; left: 6rem;" />
+							<label for="simple-xor-b" style="top: 0; left: 6rem;"></label>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 3rem; left: 7.5rem; height: 2rem;"></div>
+								<div class="Connector Horizontal Corner Right Up" style="top: 5rem; left: 5.5rem; width: 2rem;"></div>
+								<div class="Connector Vertical Corner Right" style="top: 5rem; left: 5.5rem; height: 2rem;"></div>
+								<div class="Connector Vertical Convex Right" style="top: 7rem; left: 5.5rem;"></div>
+							</div>
+
+							<div id="simple-xor-gate" class="Gate XOR" style="left: 2.5rem; top: 7rem;">
+								<span></span>
+								<span></span>
+								<div></div>
+							</div>
+							<div class="Group">
+								<div class="Connector Vertical" style="top: 12rem; left: 4.5rem; height: 2rem;"></div>
+								<div class="Result" style="left: 3rem; top: 14rem;"></div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+		<a href="#half-adder" id="half-adder" tabindex="2">Sección 2</a>
+		<section>
+			<div class="ShrinkWrap">
+				<div class="Canvas" style="width: 12.5rem; height: 21rem;">
+					<input type="checkbox" id="half-adder-a" style="top: 0; left: 3.5rem;" />
+					<label for="half-adder-a" style="top: 0; left: 3.5rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 5rem; left: 5rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 5rem; left: 7rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 11rem; left: 7rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 7rem; left: 1rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 7rem; left: 1rem; height: 4rem;"></div>
+					</div>
+
+					<input type="checkbox" id="half-adder-b" style="top: 0; left: 9.5rem;" />
+					<label for="half-adder-b" style="top: 0; left: 9.5rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 11rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 5rem; left: 9rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 5rem; left: 9rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 11rem; left: 9rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 3rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 3rem; height: 2rem;"></div>
+					</div>
+
+					<div id="half-adder-xor-gate" class="Gate XOR" style="left: 6rem; top: 11rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 16rem; left: 8rem; height: 2rem;"></div>
+						<div class="Result" style="left: 6.5rem; top: 18rem;"></div>
+					</div>
+
+					<div id="half-adder-and-gate" class="Gate AND" style="left: 0; top: 11rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 16rem; left: 2rem; height: 2rem;"></div>
+						<div class="Result" style="left: 0.5rem; top: 18rem;"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<a href="#full-adder" id="full-adder" tabindex="3">Sección 3</a>
+		<section>
+			<div class="ShrinkWrap">
+				<div class="Canvas" style="width: 21rem; height: 42rem;">
+					<input type="checkbox" id="full-adder-carry" style="top: 0; left: 6rem;" />
+					<label for="full-adder-carry" style="top: 0; left: 6rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 7.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 5rem; left: 7.5rem; width: 4rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 5rem; left: 11.5rem; height: 13rem;"></div>
+
+						<div class="Connector Horizontal Corner Left Up" style="top: 18rem; left: 11.5rem; width: 1.5rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 18rem; left: 13rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 24rem; left: 13rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 20rem; left: 7rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 20rem; left: 7rem; height: 4rem;"></div>
+					</div>
+
+					<input type="checkbox" id="full-adder-a" style="top: 0; left: 12rem;" />
+					<label for="full-adder-a" style="top: 0; left: 12rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 13.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 5rem; left: 13.5rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 5rem; left: 15.5rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 11rem; left: 15.5rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 7rem; left: 1rem; width: 14.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 7rem; left: 1rem; height: 17rem;"></div>
+					</div>
+
+					<input type="checkbox" id="full-adder-b" style="top: 0; left: 18rem;" />
+					<label for="full-adder-b" style="top: 0; left: 18rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 19.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 5rem; left: 17.5rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 5rem; left: 17.5rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 11rem; left: 17.5rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 3rem; width: 14.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 3rem; height: 15rem;"></div>
+					</div>
+
+					<div id="full-adder-xor-gate-input" class="Gate XOR" style="left: 14.5rem; top: 11rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 16rem; left: 16.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 18rem; left: 15rem; width: 1.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 18rem; left: 15rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 24rem; left: 15rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 22rem; left: 9rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 22rem; left: 9rem; height: 2rem;"></div>
+					</div>
+
+					<div id="full-adder-xor-gate-carry" class="Gate XOR" style="left: 12rem; top: 24rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 29rem; left: 14rem; height: 10rem;"></div>
+						<div class="Result" style="left: 12.5rem; top: 39rem;"></div>
+					</div>
+
+					<div id="full-adder-and-gate-input" class="Gate AND" style="left: 0; top: 24rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 29rem; left: 2rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 31rem; left: 2rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 31rem; left: 4rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 33rem; left: 4rem;"></div>
+					</div>
+
+					<div id="full-adder-and-gate-sum" class="Gate AND" style="left: 6rem; top: 24rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 29rem; left: 8rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 31rem; left: 6rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 31rem; left: 6rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 33rem; left: 6rem;"></div>
+					</div>
+
+					<div id="full-adder-or-gate-carry-out" class="Gate OR" style="left: 3rem; top: 33rem;">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 37rem; left: 5rem; height: 2rem;"></div>
+						<div class="Result" style="left: 3.5rem; top: 39rem;"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<a href="#chained-adder" id="chained-adder" tabindex="4">Sección 4</a>
+		<section>
+			<div>
+				<div class="Canvas" style="width: 75rem; height: 44rem;">
+					<input type="checkbox" id="chained-adder-1-a" tabindex="47" style="top: 0; left: 68.5rem;" />
+					<label for="chained-adder-1-a" style="top: 0; left: 68.5rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 70rem; height: 23rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 26rem; left: 70rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 64rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 64rem; height: 17rem;"></div>
+					</div>
+
+					<input type="checkbox" id="chained-adder-1-b" tabindex="48" style="top: 4rem; left: 71.5rem;" />
+					<label for="chained-adder-1-b" style="top: 4rem; left: 71.5rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 7rem; left: 73rem; height: 4rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 11rem; left: 66rem; width: 7rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 11rem; left: 66rem; height: 15rem;"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 11rem; left: 72rem; height: 15rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 26rem; left: 72rem;"></div>
+					</div>
+
+					<div id="chained-adder-1-xor-gate-sum" class="Gate XOR" style="left: 69rem; top: 26rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 71rem; height: 10rem;"></div>
+						<div class="Result" style="left: 69.5rem; top: 41rem;"></div>
+					</div>
+					<div id="chained-adder-1-gate-carry-out" class="Gate AND" style="left: 63rem; top: 26rem;">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 65rem; height: 10rem;"></div>
+						<div class="Connector Horizontal Corner Up Right" style="top: 41rem; left: 58rem; width: 7rem;"></div>
+						<div class="Connector Vertical Corner Right Bottom" style="top: 22rem; left: 58rem; height: 19rem;"></div>
+						<div class="Connector Horizontal Corner Down Right" style="top: 22rem; left: 47rem; width: 11rem; z-index: 2"></div>
+						<div class="Connector Vertical Corner Right" style="top: 22rem; left: 47rem; height: 4rem; z-index: 2"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 22rem; left: 53rem; height: 4rem; z-index: 2"></div>
+						<div class="Connector Vertical Convex Left" style="top: 26rem; left: 53rem;"></div>
+					</div>
+
+
+
+					<input type="checkbox" id="chained-adder-2-a" tabindex="45" style="top: 0; left: 54rem;" />
+					<label for="chained-adder-2-a" style="top: 0; left: 54rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 55.5rem; height: 10rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 13rem; left: 55.5rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 41rem; width: 14.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 41rem; height: 17rem;"></div>
+					</div>
+
+					<input type="checkbox" id="chained-adder-2-b" tabindex="46" style="top: 4rem; left: 57rem;" />
+					<label for="chained-adder-2-b" style="top: 4rem; left: 57rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 7rem; left: 58.5rem; height: 4rem;"></div>
+
+						<div class="Connector Horizontal Corner Right Up" style="top: 11rem; left: 43rem; width: 15.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 11rem; left: 43rem; height: 15rem;"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 11rem; left: 57.5rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 13rem; left: 57.5rem;"></div>
+					</div>
+
+					<div id="chained-adder-2-xor-gate-input" class="Gate XOR" style="left: 54.5rem; top: 13rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 18rem; left: 56.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 20rem; left: 55rem; width: 1.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 20rem; left: 55rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 26rem; left: 55rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 24rem; left: 49rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 24rem; left: 49rem; height: 2rem;"></div>
+					</div>
+
+					<div id="chained-adder-2-xor-gate-carry" class="Gate XOR" style="left: 52rem; top: 26rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 54rem; height: 10rem;"></div>
+						<div class="Result" style="left: 52.5rem; top: 41rem;"></div>
+					</div>
+
+					<div id="chained-adder-2-and-gate-input" class="Gate AND" style="left: 40rem; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 42rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 33rem; left: 42rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 33rem; left: 44rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 35rem; left: 44rem;"></div>
+					</div>
+
+					<div id="chained-adder-2-and-gate-sum" class="Gate AND" style="left: 46rem; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 48rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 33rem; left: 46rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 33rem; left: 46rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 35rem; left: 46rem;"></div>
+					</div>
+
+					<div id="chained-adder-2-or-gate-carry-out" class="Gate OR" style="left: 43rem; top: 35rem;">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 39rem; left: 45rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Up Right" style="top: 41rem; left: 38rem; width: 7rem;"></div>
+						<div class="Connector Vertical Corner Right Bottom" style="top: 22rem; left: 38rem; height: 19rem;"></div>
+						<div class="Connector Horizontal Corner Down Right" style="top: 22rem; left: 27rem; width: 11rem; z-index: 2"></div>
+						<div class="Connector Vertical Corner Right" style="top: 22rem; left: 27rem; height: 4rem; z-index: 2"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 22rem; left: 33rem; height: 4rem; z-index: 2"></div>
+						<div class="Connector Vertical Convex Left" style="top: 26rem; left: 33rem;"></div>
+					</div>
+
+
+					<input type="checkbox" id="chained-adder-3-a" tabindex="43" style="top: 0; left: 34rem;" />
+					<label for="chained-adder-3-a" style="top: 0; left: 34rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 35.5rem; height: 10rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 13rem; left: 35.5rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 21rem; width: 14.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 21rem; height: 17rem;"></div>
+					</div>
+
+					<input type="checkbox" id="chained-adder-3-b" tabindex="44" style="top: 4rem; left: 37rem;" />
+					<label for="chained-adder-3-b" style="top: 4rem; left: 37rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 7rem; left: 38.5rem; height: 4rem;"></div>
+
+						<div class="Connector Horizontal Corner Right Up" style="top: 11rem; left: 23rem; width: 15.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 11rem; left: 23rem; height: 15rem;"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 11rem; left: 37.5rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 13rem; left: 37.5rem;"></div>
+					</div>
+
+					<div id="chained-adder-3-xor-gate-input" class="Gate XOR" style="left: 34.5rem; top: 13rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 18rem; left: 36.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 20rem; left: 35rem; width: 1.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 20rem; left: 35rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 26rem; left: 35rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 24rem; left: 29rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 24rem; left: 29rem; height: 2rem;"></div>
+					</div>
+
+					<div id="chained-adder-3-xor-gate-carry" class="Gate XOR" style="left: 32rem; top: 26rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 34rem; height: 10rem;"></div>
+						<div class="Result" style="left: 32.5rem; top: 41rem;"></div>
+					</div>
+
+					<div id="chained-adder-3-and-gate-input" class="Gate AND" style="left: 20rem; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 22rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 33rem; left: 22rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 33rem; left: 24rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 35rem; left: 24rem;"></div>
+					</div>
+
+					<div id="chained-adder-3-and-gate-sum" class="Gate AND" style="left: 26rem; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 28rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 33rem; left: 26rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 33rem; left: 26rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 35rem; left: 26rem;"></div>
+					</div>
+
+					<div id="chained-adder-3-or-gate-carry-out" class="Gate OR" style="left: 23rem; top: 35rem;">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 39rem; left: 25rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Up Right" style="top: 41rem; left: 18rem; width: 7rem;"></div>
+						<div class="Connector Vertical Corner Right Bottom" style="top: 22rem; left: 18rem; height: 19rem;"></div>
+						<div class="Connector Horizontal Corner Down Right" style="top: 22rem; left: 7rem; width: 11rem; z-index: 2"></div>
+						<div class="Connector Vertical Corner Right" style="top: 22rem; left: 7rem; height: 4rem; z-index: 2"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 22rem; left: 13rem; height: 4rem; z-index: 2"></div>
+						<div class="Connector Vertical Convex Left" style="top: 26rem; left: 13rem;"></div>
+					</div>
+
+
+					<input type="checkbox" id="chained-adder-4-a" tabindex="41" style="top: 0; left: 14rem;" />
+					<label for="chained-adder-4-a" style="top: 0; left: 14rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 3rem; left: 15.5rem; height: 10rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 13rem; left: 15.5rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 9rem; left: 1rem; width: 14.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 9rem; left: 1rem; height: 17rem;"></div>
+					</div>
+
+					<input type="checkbox" id="chained-adder-4-b" tabindex="42" style="top: 4rem; left: 17rem;" />
+					<label for="chained-adder-4-b" style="top: 4rem; left: 17rem;"></label>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 7rem; left: 18.5rem; height: 4rem;"></div>
+
+						<div class="Connector Horizontal Corner Right Up" style="top: 11rem; left: 3rem; width: 15.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 11rem; left: 3rem; height: 15rem;"></div>
+
+						<div class="Connector Vertical Junction Top" style="top: 11rem; left: 17.5rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 13rem; left: 17.5rem;"></div>
+					</div>
+
+					<div id="chained-adder-4-xor-gate-input" class="Gate XOR" style="left: 14.5rem; top: 13rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 18rem; left: 16.5rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 20rem; left: 15rem; width: 1.5rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 20rem; left: 15rem; height: 6rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 26rem; left: 15rem;"></div>
+
+						<div class="Connector Horizontal Junction Right" style="top: 24rem; left: 9rem; width: 6rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 24rem; left: 9rem; height: 2rem;"></div>
+					</div>
+
+					<div id="chained-adder-4-xor-gate-carry" class="Gate XOR" style="left: 12rem; top: 26rem;">
+						<span></span>
+						<span></span>
+						<div></div>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 14rem; height: 10rem;"></div>
+						<div class="Result" style="left: 12.5rem; top: 41rem;"></div>
+					</div>
+
+					<div id="chained-adder-4-and-gate-input" class="Gate AND" style="left: 0; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 2rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Left Up" style="top: 33rem; left: 2rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Left" style="top: 33rem; left: 4rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Left" style="top: 35rem; left: 4rem;"></div>
+					</div>
+
+					<div id="chained-adder-4-and-gate-sum" class="Gate AND" style="left: 6rem; top: 26rem;"></div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 31rem; left: 8rem; height: 2rem;"></div>
+						<div class="Connector Horizontal Corner Right Up" style="top: 33rem; left: 6rem; width: 2rem;"></div>
+						<div class="Connector Vertical Corner Right" style="top: 33rem; left: 6rem; height: 2rem;"></div>
+						<div class="Connector Vertical Convex Right" style="top: 35rem; left: 6rem;"></div>
+					</div>
+
+					<div id="chained-adder-4-or-gate-carry-out" class="Gate OR" style="left: 3rem; top: 35rem;">
+						<span></span>
+						<span></span>
+					</div>
+					<div class="Group">
+						<div class="Connector Vertical" style="top: 39rem; left: 5rem; height: 2rem;"></div>
+						<div class="Result" style="left: 3.5rem; top: 41rem;"></div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="DefaultTab">
+			<div class="ShrinkWrap">
+				<h1 style="text-align:center">Compuertas Logicas</h1>
+				<p style="text-align:center">Proyecto de Matemáticas Discretas.</p>
+			</div>
+		</section>
+	</nav>
+</body>
+</html>
